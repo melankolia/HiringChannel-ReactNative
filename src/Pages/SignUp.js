@@ -4,7 +4,7 @@ import React from 'react';
 import {Image, Text, TouchableOpacity, ScrollView, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
-const SignIn = props => {
+const SignUp = props => {
   return (
     <ScrollView>
       <View style={{marginLeft: 30, marginRight: 20, flex: 1}}>
@@ -32,59 +32,90 @@ const SignIn = props => {
             </Text>
           </View>
         </TouchableOpacity>
-        <Image
+        <Text
           style={{
-            marginTop: -15,
-            width: 170,
-            height: 180,
-            resizeMode: 'contain',
-          }}
-          source={require('../Images/arkaHD.png')}
-        />
+            color: 'black',
+            fontSize: 24,
+            fontFamily: 'AirbnbCerealBold',
+            marginBottom: 25,
+          }}>
+          Sign Up
+        </Text>
         <Text
           style={{
             color: 'black',
             fontSize: 24,
             fontFamily: 'AirbnbCerealBook',
           }}>
-          Proceed with your
+          Hello there !
         </Text>
         <Text
           style={{
             color: 'black',
-            fontSize: 30,
-            fontFamily: 'AirbnbCerealBold',
+            fontSize: 24,
+            fontFamily: 'AirbnbCerealBook',
             marginBottom: 50,
           }}>
-          Login
+          Welcome to you
         </Text>
+
         <Input
           inputContainerStyle={{marginLeft: -10, height: 35}}
           containerStyle={{marginBottom: 15}}
           labelStyle={{
             marginHorizontal: -10,
-            fontSize: 12,
+            fontSize: 14,
             fontFamily: 'AirbnbCerealBook',
           }}
           label="Username"
+          placeholder="Enter Username"
+          inputStyle={{fontSize: 12}}
         />
         <Input
           inputContainerStyle={{marginLeft: -10, height: 35}}
+          containerStyle={{marginBottom: 15}}
           labelStyle={{
             marginHorizontal: -10,
-            fontSize: 12,
+            fontSize: 14,
+            fontFamily: 'AirbnbCerealBook',
+          }}
+          label="Name"
+          placeholder="Enter Name"
+          inputStyle={{fontSize: 12}}
+        />
+        <Input
+          inputContainerStyle={{marginLeft: -10, height: 35}}
+          containerStyle={{marginBottom: 15}}
+          labelStyle={{
+            marginHorizontal: -10,
+            fontSize: 14,
             fontFamily: 'AirbnbCerealBook',
           }}
           secureTextEntry={true}
           label="Password"
+          placeholder="Enter Password"
+          inputStyle={{fontSize: 12}}
         />
+        <Input
+          inputContainerStyle={{marginLeft: -10, height: 35}}
+          containerStyle={{marginBottom: 15}}
+          labelStyle={{
+            marginHorizontal: -10,
+            fontSize: 14,
+            fontFamily: 'AirbnbCerealBook',
+          }}
+          label="Password"
+          placeholder="Enter Password"
+          inputStyle={{fontSize: 12}}
+        />
+
         <TouchableOpacity
           style={{
             elevation: 3,
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#575A89',
-            marginTop: 30,
+            marginTop: 20,
             padding: 10,
             height: 45,
             width: 300,
@@ -97,23 +128,26 @@ const SignIn = props => {
               color: 'white',
               fontFamily: 'AirbnbCerealMedium',
             }}>
-            Login
+            Register
           </Text>
         </TouchableOpacity>
         <Text
           style={{
             color: '#8c8c8c',
-            fontSize: 12,
+            fontSize: 10,
             fontFamily: 'AirbnbCerealMedium',
-            marginBottom: 50,
+
             alignSelf: 'center',
             marginTop: 10,
+            paddingLeft: 10,
+            paddingRight: 20,
           }}>
-          Forgot Password ?
+          By registering with Hiring Channel App, you agree to our Term of Use
+          and our Privacy Policy
         </Text>
       </View>
     </ScrollView>
   );
 };
 
-export default SignIn;
+export default SignUp;

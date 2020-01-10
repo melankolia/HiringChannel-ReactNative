@@ -63,7 +63,7 @@ const Started = props => {
             width: 300,
             borderRadius: 10,
           }}
-          onPress={() => props.navigation.navigate('Home')}>
+          onPress={() => props.navigation.navigate('SignIn')}>
           <Text
             style={{
               fontSize: 16,
@@ -84,7 +84,8 @@ const Started = props => {
             height: 45,
             width: 300,
             borderRadius: 10,
-          }}>
+          }}
+          onPress={() => props.navigation.navigate('SignUp')}>
           <Text
             style={{
               fontSize: 16,
