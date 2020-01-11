@@ -1,37 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {ButtonGroup, Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import React from 'react';
-import {Image, Text, TouchableOpacity, ScrollView, View} from 'react-native';
-import {Input} from 'react-native-elements';
+import BackFlat from '../Components/BackFlat';
 
 const SignUp = props => {
+  const [selectedIndex, setselectedIndex] = useState(0);
+  const buttons = ['Company', 'Engineer'];
+
+  const updateIndex = index => {
+    setselectedIndex(index);
+    console.log(buttons[index]);
+  };
+
   return (
     <ScrollView>
       <View style={{marginLeft: 30, marginRight: 20, flex: 1}}>
-        <TouchableOpacity
-          style={{height: 65, width: 80}}
-          onPress={() => props.navigation.navigate('Started')}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 50,
-              width: 80,
-              marginLeft: -35,
-            }}>
-            <Icon name="angle-left" size={20} />
-            <Text
-              style={{
-                color: 'black',
-                fontSize: 14,
-                fontFamily: 'AirbnbCerealBook',
-                marginLeft: 5,
-              }}>
-              Back
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <BackFlat navigation={props.navigation} page="Started" />
         <Text
           style={{
             color: 'black',
@@ -58,7 +44,6 @@ const SignUp = props => {
           }}>
           Welcome to you
         </Text>
-
         <Input
           inputContainerStyle={{marginLeft: -10, height: 35}}
           containerStyle={{marginBottom: 15}}
@@ -96,19 +81,28 @@ const SignUp = props => {
           placeholder="Enter Password"
           inputStyle={{fontSize: 12}}
         />
-        <Input
-          inputContainerStyle={{marginLeft: -10, height: 35}}
-          containerStyle={{marginBottom: 15}}
-          labelStyle={{
-            marginHorizontal: -10,
+        <Text
+          style={{
             fontSize: 14,
-            fontFamily: 'AirbnbCerealBook',
+            fontFamily: 'AirbnbCerealBold',
+            color: '#87919F',
+            marginBottom: 5,
+          }}>
+          Role
+        </Text>
+        <ButtonGroup
+          onPress={updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{
+            height: 40,
+            marginLeft: 0,
+            borderRadius: 50,
+            borderColor: 'gray',
           }}
-          label="Password"
-          placeholder="Enter Password"
-          inputStyle={{fontSize: 12}}
+          textStyle={{fontSize: 12, fontFamily: 'AirbnbCerealBook'}}
+          selectedButtonStyle={{backgroundColor: '#87919F'}}
         />
-
         <TouchableOpacity
           style={{
             elevation: 3,
@@ -121,7 +115,7 @@ const SignUp = props => {
             width: 300,
             borderRadius: 10,
           }}
-          onPress={() => props.navigation.navigate('Home')}>
+          onPress={() => props.navigation.navigate('SignIn')}>
           <Text
             style={{
               fontSize: 16,

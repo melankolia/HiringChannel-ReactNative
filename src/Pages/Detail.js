@@ -1,15 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
-  Button,
+  Alert,
   Image,
+  ImageBackground,
+  Picker,
+  ScrollView,
   Text,
   View,
-  Picker,
-  Alert,
-  ScrollView,
 } from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
+import Back from '../Components/Back';
 
 const Detail = props => {
   const [toggleModal, settoggleModal] = useState(false);
@@ -88,10 +90,11 @@ const Detail = props => {
           </Modal>
         </View>
         <View style={{width: '100%', alignItems: 'center'}}>
-          <Image
-            style={{width: '100%', height: 220}}
-            source={require('../Images/harishanBG.png')}
-          />
+          <ImageBackground
+            style={{width: '100%', height: 220, zIndex: -1}}
+            source={require('../Images/harishanBG.png')}>
+            <Back page="Home" />
+          </ImageBackground>
         </View>
         <View
           style={{
@@ -214,18 +217,25 @@ const Detail = props => {
             {props.navigation.getParam('skills')}
           </Text>
         </View>
-        <View
+        <TouchableOpacity
           style={{
             width: '100%',
             marginTop: 40,
-          }}>
-          {}
-          <Button
-            title="HIRE ME"
-            color="#F4CF5D"
-            onPress={() => handleToggleModal(true)}
-          />
-        </View>
+            height: 35,
+            backgroundColor: '#F4CF5D',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onPress={() => handleToggleModal(true)}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 16,
+              fontFamily: 'AirbnbCerealBook',
+            }}>
+            HIRE ME
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

@@ -1,37 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
-import {Image, Text, TouchableOpacity, ScrollView, View} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {Input} from 'react-native-elements';
 
 const SignIn = props => {
   return (
     <ScrollView>
-      <View style={{marginLeft: 30, marginRight: 20, flex: 1}}>
-        <TouchableOpacity
-          style={{height: 65, width: 80}}
-          onPress={() => props.navigation.navigate('Started')}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 50,
-              width: 80,
-              marginLeft: -35,
-            }}>
-            <Icon name="angle-left" size={20} />
-            <Text
-              style={{
-                color: 'black',
-                fontSize: 14,
-                fontFamily: 'AirbnbCerealBook',
-                marginLeft: 5,
-              }}>
-              Back
-            </Text>
-          </View>
-        </TouchableOpacity>
+      <View
+        style={{
+          marginLeft: 30,
+          marginRight: 20,
+          flex: 1,
+        }}>
         <Image
           style={{
             marginTop: -15,
@@ -46,6 +26,7 @@ const SignIn = props => {
             color: 'black',
             fontSize: 24,
             fontFamily: 'AirbnbCerealBook',
+            marginBottom: -5,
           }}>
           Proceed with your
         </Text>
@@ -90,7 +71,7 @@ const SignIn = props => {
             width: 300,
             borderRadius: 10,
           }}
-          onPress={() => props.navigation.navigate('Home')}>
+          onPress={() => props.navigation.navigate('Engineer')}>
           <Text
             style={{
               fontSize: 16,

@@ -10,17 +10,17 @@ import {
 } from 'react-native';
 
 const Card = props => {
+  const goToDetail = () => {
+    props.navigation.navigate('Detail', {
+      name: props.name,
+      title: props.title,
+      skills: props.skills,
+    });
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() =>
-          props.navigation.navigate('Detail', {
-            name: props.name,
-            title: props.title,
-            skills: props.skills,
-          })
-        }>
+      <TouchableOpacity activeOpacity={0.9} onPress={() => goToDetail()}>
         <ImageBackground
           style={styles.image}
           source={require('../Images/lucas.png')}

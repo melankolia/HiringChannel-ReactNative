@@ -1,24 +1,31 @@
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {Detail, Home, SignIn, Started, SignUp} from '../Pages/Index';
+import {Detail, Home, SignIn, Started, SignUp, Engineer} from '../Pages/Index';
 
-const Router = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
-    Home: {
-      screen: Home,
-    },
-    Detail: {
-      screen: Detail,
-    },
-    Started: {
-      screen: Started,
-    },
-    SignIn: {
-      screen: SignIn,
-    },
-    SignUp: {
-      screen: SignUp,
-    },
+    Home,
+    Detail,
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'Home',
+  },
+);
+const EngineerStack = createStackNavigator(
+  {
+    Engineer,
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'Engineer',
+  },
+);
+const OuterStack = createStackNavigator(
+  {
+    Started,
+    SignIn,
+    SignUp,
   },
   {
     headerMode: 'none',
@@ -26,4 +33,15 @@ const Router = createStackNavigator(
   },
 );
 
+const Router = createSwitchNavigator(
+  {
+    HomeStack,
+    EngineerStack,
+    OuterStack,
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'OuterStack',
+  },
+);
 export default createAppContainer(Router);
