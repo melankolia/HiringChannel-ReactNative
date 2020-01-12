@@ -1,14 +1,62 @@
 import React, {Component} from 'react';
-import {Image, ScrollView, StyleSheet, TextInput, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+} from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
 import Card from '../Components/Card.js';
 import bellpic from '../Images/bell1.png';
 import arkapic from '../Images/image1.png';
+import {connect} from 'react-redux';
+import {getAllEngineer} from '../Redux/Actions/Engineer/getAllEngineer';
 
 class Home extends Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {
+      engineer: '',
+    };
+  }
+  fetchData = async () => {
+    let username, password, role, token, response;
+    try {
+      username = await AsyncStorage.getItem('username');
+      password = await AsyncStorage.getItem('password');
+      role = await AsyncStorage.getItem('role');
+      token = await AsyncStorage.getItem('token');
+
+      if (username !== null && password !== null && role !== null) {
+        console.log('username : ', username);
+        console.log('password : ', password);
+        console.log('role : ', role);
+        let config = {
+          headers: {Authorization: 'Bearer ' + token, username: username},
+          params: {
+            Limit: 10,
+          },
+        };
+        await this.props.dispatch(getAllEngineer(config, username));
+        response = this.props.engineer.engineerBeta.data.response;
+      } else {
+        console.log('Null Data');
+      }
+    } catch (e) {
+      console.log('Something went wrong');
+    }
+    this.setState({engineer: response});
+    console.log(this.state);
+  };
+  componentDidMount() {
+    this.fetchData();
+  }
 
   render() {
+    const {engineer} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -19,48 +67,25 @@ class Home extends Component {
         <TextInput style={styles.search} placeholder="Search" />
         <ScrollView>
           <View style={styles.body}>
-            <Card
-              name="Budi Bulog"
-              title="Frontend Developer"
-              skills="ReactJS, React Native, Flutter"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Rich Brian"
-              title="Fullstack Developer"
-              skills="ReactJS, React Native, ExpressJS, NodeJS"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Joji"
-              title="Backend Developer"
-              skills="ExpressJS, NodeJS, Golang"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Niki Zefanya"
-              title="Frontend Developer"
-              skills="VueJS, AngularJS"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Filthy Frank"
-              title="Backend Developer"
-              skills="Ruby on Rails, Python"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Juice WRLD"
-              title="Frontend Developer"
-              skills="AngularJS"
-              navigation={this.props.navigation}
-            />
-            <Card
-              name="Saykoji"
-              title="Frontend Developer"
-              skills="React Native, ReactJS"
-              navigation={this.props.navigation}
-            />
+            {engineer.length > 0 ? (
+              engineer.map((value, index) => (
+                <Card
+                  name={engineer[index].Name}
+                  title={engineer[index].Title}
+                  skills={engineer[index].Skills}
+                  navigation={this.props.navigation}
+                />
+              ))
+            ) : (
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontFamily: 'AirbnbCerealBook',
+                  color: 'gray',
+                }}>
+                EMPTY
+              </Text>
+            )}
           </View>
         </ScrollView>
         <FloatingAction color={'#F4CF5D'} />
@@ -112,4 +137,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    engineer: state.getAllEngineer,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

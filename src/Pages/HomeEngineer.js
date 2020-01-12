@@ -31,15 +31,17 @@ class HomeEngineer extends Component {
         console.log('username : ', username);
         console.log('password : ', password);
         console.log('role : ', role);
+        console.log('token : ', token);
+        await this.props.dispatch(getEngineer(config, username));
       }
     } catch (e) {
       console.log('Something went wrong');
+      console.log(e);
     }
     let config = {
       headers: {Authorization: 'Bearer ' + token, username: username},
     };
-    await this.props.dispatch(getEngineer(config, username));
-    if (this.props.engineer.engineerBeta.Skills > 0) {
+    if (this.props.engineer.engineerBeta.Skills.length > 0) {
       let SkillsData = this.props.engineer.engineerBeta.Skills.split(',');
       this.setState({SkillsData});
     } else {

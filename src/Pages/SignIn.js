@@ -32,6 +32,7 @@ const SignIn = props => {
           AsyncStorage.setItem('password', password);
           AsyncStorage.setItem('role', data.role);
           AsyncStorage.setItem('token', data.token);
+          console.log(data);
           if (data.role === 'company') {
             props.navigation.navigate('Home');
           } else if (data.role === 'engineer') {

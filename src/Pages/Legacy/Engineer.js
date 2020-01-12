@@ -3,8 +3,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Header from '../Components/Legacy/Header';
-import Stats from '../Components/Legacy/Stats';
+import Header from '../../Components/Legacy/Header';
+import Stats from '../../Components/Legacy/Stats';
 
 const Engineer = () => {
   return (
