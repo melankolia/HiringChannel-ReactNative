@@ -1,17 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-import Header from '../Components/Header';
-import Stats from '../Components/Stats';
+import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Header from '../Components/Legacy/Header';
+import Stats from '../Components/Legacy/Stats';
 
 const Engineer = () => {
   return (
