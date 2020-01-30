@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import React, {Component} from 'react';
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
   TextInput,
   View,
-  Text,
 } from 'react-native';
 import {FloatingAction} from 'react-native-floating-action';
+import {connect} from 'react-redux';
 import Card from '../Components/Card.js';
 import bellpic from '../Images/bell1.png';
 import arkapic from '../Images/image1.png';
-import {connect} from 'react-redux';
 import {getAllEngineer} from '../Redux/Actions/Engineer/getAllEngineer';
 
 class Home extends Component {
@@ -20,15 +20,21 @@ class Home extends Component {
     super();
     this.state = {
       engineer: '',
+      limit: 10,
     };
   }
-  fetchData = async () => {
+  fetchData = async (search, searchName) => {
     let username, password, role, token, response;
     try {
       username = await AsyncStorage.getItem('username');
       password = await AsyncStorage.getItem('password');
       role = await AsyncStorage.getItem('role');
       token = await AsyncStorage.getItem('token');
+
+      let link = [
+        'https://hiring-channel-app.herokuapp.com/api/Engineer',
+        'https://hiring-channel-app.herokuapp.com/api/Engineer/search',
+      ];
 
       if (username !== null && password !== null && role !== null) {
         console.log('username : ', username);
@@ -37,11 +43,18 @@ class Home extends Component {
         let config = {
           headers: {Authorization: 'Bearer ' + token, username: username},
           params: {
-            Limit: 10,
+            searchName: searchName,
+            Limit: this.state.limit,
           },
         };
-        await this.props.dispatch(getAllEngineer(config, username));
-        response = this.props.engineer.engineerBeta.data.response;
+        console.log('Search: ', search);
+        if (search) {
+          await this.props.dispatch(getAllEngineer(link[1], config));
+          response = this.props.engineer.engineerBeta.data.response;
+        } else if (search === false) {
+          await this.props.dispatch(getAllEngineer(link[0], config));
+          response = this.props.engineer.engineerBeta.data.response;
+        }
       } else {
         console.log('Null Data');
       }
@@ -49,10 +62,10 @@ class Home extends Component {
       console.log('Something went wrong');
     }
     this.setState({engineer: response});
-    console.log(this.state);
+    // console.log(this.state);
   };
   componentDidMount() {
-    this.fetchData();
+    this.fetchData(false, '');
   }
 
   render() {
@@ -64,12 +77,19 @@ class Home extends Component {
           <Image style={styles.headerPic} source={arkapic} />
           <Image style={styles.bellPic} source={bellpic} />
         </View>
-        <TextInput style={styles.search} placeholder="Search" />
+        <TextInput
+          style={styles.search}
+          placeholder="Search"
+          onSubmitEditing={e => {
+            this.fetchData(true, e.nativeEvent.text);
+          }}
+        />
         <ScrollView>
           <View style={styles.body}>
             {engineer.length > 0 ? (
               engineer.map((value, index) => (
                 <Card
+                  key={index}
                   name={engineer[index].Name}
                   title={engineer[index].Title}
                   skills={engineer[index].Skills}
@@ -77,14 +97,11 @@ class Home extends Component {
                 />
               ))
             ) : (
-              <Text
-                style={{
-                  fontSize: 12,
-                  fontFamily: 'AirbnbCerealBook',
-                  color: 'gray',
-                }}>
-                EMPTY
-              </Text>
+              <ActivityIndicator
+                style={styles.spinner}
+                size="large"
+                color="gray"
+              />
             )}
           </View>
         </ScrollView>
@@ -95,6 +112,9 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+  spinner: {
+    margin: 20,
+  },
   container: {
     flex: 1,
   },

@@ -1,6 +1,14 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {Detail, Home, SignIn, Started, SignUp, Engineer} from '../Pages/Index';
+import {
+  Detail,
+  Home,
+  SignIn,
+  Started,
+  SignUp,
+  Engineer,
+  editEngineer,
+} from '../Pages/Index';
 
 const HomeStack = createStackNavigator(
   {
@@ -15,6 +23,7 @@ const HomeStack = createStackNavigator(
 const EngineerStack = createStackNavigator(
   {
     Engineer,
+    editEngineer,
   },
   {
     headerMode: 'none',

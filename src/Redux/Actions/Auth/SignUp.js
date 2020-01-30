@@ -1,8 +1,6 @@
 import Axios from 'axios';
 
-const URL_STRING = 'https://hiring-channel-app.herokuapp.com/auth/register';
-
-export const authSignUp = data => {
+export const authSignUp = (URL_STRING, data) => {
   console.log(data);
   return {
     type: 'POST_REGISTER',

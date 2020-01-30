@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import AsyncStorage from '@react-native-community/async-storage';
 import React, {Component} from 'react';
-import {Image, ImageBackground, ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import Description from '../Components/Description';
 import Skills from '../Components/Skills';
 import {getEngineer} from '../Redux/Actions/Engineer/getEngineer';
+import Header from '../Components/Header';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 class HomeEngineer extends Component {
   constructor() {
@@ -27,6 +28,10 @@ class HomeEngineer extends Component {
       role = await AsyncStorage.getItem('role');
       token = await AsyncStorage.getItem('token');
 
+      let config = {
+        headers: {Authorization: 'Bearer ' + token, username: username},
+      };
+
       if (username !== null && password !== null && role !== null) {
         console.log('username : ', username);
         console.log('password : ', password);
@@ -38,10 +43,9 @@ class HomeEngineer extends Component {
       console.log('Something went wrong');
       console.log(e);
     }
-    let config = {
-      headers: {Authorization: 'Bearer ' + token, username: username},
-    };
-    if (this.props.engineer.engineerBeta.Skills.length > 0) {
+
+    // console.log(this.props.engineer.engineerBeta.Skills)
+    if (this.props.engineer.engineerBeta.Skills) {
       let SkillsData = this.props.engineer.engineerBeta.Skills.split(',');
       this.setState({SkillsData});
     } else {
@@ -55,100 +59,15 @@ class HomeEngineer extends Component {
   componentDidMount() {
     let username, password, role, token;
     this.fetchData(username, password, role, token);
+    console.log('DID MOUNT 1');
   }
   render() {
     const buttons = ['Description', 'Skills', 'Projects'];
     const {selectedIndex, SkillsData} = this.state;
-
     return (
       <View style={{flexDirection: 'column'}}>
         <ScrollView>
-          <View style={{width: '100%', alignItems: 'center'}}>
-            <ImageBackground
-              style={{width: '100%', height: 220, zIndex: -1}}
-              source={require('../Images/harishanBG.png')}>
-              <TouchableOpacity
-                style={{alignSelf: 'flex-end', marginRight: 10, marginTop: 10}}>
-                <Icon name="cog" size={30} color="white" />
-              </TouchableOpacity>
-            </ImageBackground>
-          </View>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              position: 'relative',
-            }}>
-            <Image
-              style={{
-                width: 120,
-                height: 180,
-                marginLeft: 19,
-                marginTop: -40,
-                borderRadius: 20,
-              }}
-              source={require('../Images/harishanSM.png')}
-            />
-            <View
-              style={{flexDirection: 'column', marginTop: 5, marginLeft: 19}}>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 26,
-                  fontFamily: 'AirbnbCerealMedium',
-                }}>
-                {this.props.engineer.engineerBeta.Name}
-              </Text>
-              <Text
-                style={{
-                  margin: 0,
-                  color: 'black',
-                  fontSize: 12,
-                  fontFamily: 'AirbnbCerealMedium',
-                }}>
-                {this.props.engineer.engineerBeta.Title}
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: 50,
-                }}>
-                <Image
-                  style={{marginRight: 5, height: 15, width: 15}}
-                  source={require('../Images/check2.png')}
-                />
-                <Text
-                  style={{
-                    margin: 0,
-                    color: 'black',
-                    fontSize: 12,
-                    fontFamily: 'AirbnbCerealMedium',
-                  }}>
-                  47 Projects
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Image
-                  style={{marginRight: 5, height: 15, width: 15}}
-                  source={require('../Images/star2.png')}
-                />
-                <Text
-                  style={{
-                    margin: 0,
-                    color: 'black',
-                    fontSize: 12,
-                    fontFamily: 'AirbnbCerealMedium',
-                  }}>
-                  97% Success Rate
-                </Text>
-              </View>
-            </View>
-          </View>
+          <Header navigation={this.props.navigation} editMode={false} />
           <View
             style={{
               paddingLeft: 20,
@@ -165,7 +84,7 @@ class HomeEngineer extends Component {
                 height: 35,
                 marginLeft: 0,
                 borderRadius: 50,
-                marginBottom: 15,
+                marginBottom: 5,
                 borderColor: 'gray',
               }}
               textStyle={{
@@ -175,8 +94,36 @@ class HomeEngineer extends Component {
               selectedButtonStyle={{backgroundColor: '#F4CF5D'}}
               selectedTextStyle={{color: 'black'}}
             />
+            {this.state.selectedIndex === 1 ? (
+              <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                <TouchableOpacity>
+                  <Icon
+                    style={{
+                      marginHorizontal: 5,
+                      marginTop: 2,
+                    }}
+                    name="minus"
+                    size={14}
+                    color="#989898"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon
+                    style={{
+                      marginHorizontal: 5,
+                      marginTop: 2,
+                    }}
+                    name="plus"
+                    size={14}
+                    color="#989898"
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : null}
+
             <View
               style={{
+                marginTop: 10,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'flex-start',

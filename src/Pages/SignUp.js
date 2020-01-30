@@ -26,8 +26,10 @@ const SignUp = props => {
       password: password,
       role: role,
     };
-    await props.dispatch(authSignUp(data));
+    const URL_STRING = 'https://hiring-channel-app.herokuapp.com/auth/register';
+    await props.dispatch(authSignUp(URL_STRING, data));
     let response = props.signUp.response;
+    console.log(props);
     console.log('RESPON : ', response);
     if (response.status === 200) {
       if (response.data.status === 'Registration Success') {
