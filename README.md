@@ -12,9 +12,9 @@
 - [Features](#Features)
 - [Requirements](#Requirements)
 - [Screenshots](#Screenshots)
-- [Release APK](#Release APK)
-- [Related Project](#Related Project)
-- [Contributors](#contributors)
+- [Release APK](#Release-APK)
+- [Related Project](#Related-Project)
+- [Contributors](#Contributors)
 
 ## Introduction
 <b>Hiring Channel App</b> is a Android app that build for company to scouting and hiring available Engineer based on preference (skill, name, etc).
