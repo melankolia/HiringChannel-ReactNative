@@ -5,6 +5,10 @@
 <p align="center">
   Built with <b>React Native</b>.
 </p>
+<div align="center">
+  <image width="100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" />
+  </div>
+
 
 ## Table of Contents
 
