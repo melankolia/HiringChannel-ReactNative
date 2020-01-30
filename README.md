@@ -3,11 +3,7 @@
     <image align="center" width="200" src='./web_hi_res_512.png' />
   </p>
 <p style="font-size:12" align="center">
-  Built with 
-  <div align="center">
-  <image width="100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" />
-  <p style="font-size:10"; ><b>React Native</b></p>
-  </div>
+  Built with <b>React Native</b>
 </p>
 
 
