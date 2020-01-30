@@ -8,13 +8,12 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Usage](#usage-for-development)
-- [Screenshots](#screenshots)
-- [Release APK](#release-apk)
-- [Related Project](#related-project-backend)
+- [Introduction](#Introduction)
+- [Features](#Features)
+- [Requirements](#Requirements)
+- [Screenshots](#Screenshots)
+- [Release APK](#Release APK)
+- [Related Project](#Related Project)
 - [Contributors](#contributors)
 
 ## Introduction
