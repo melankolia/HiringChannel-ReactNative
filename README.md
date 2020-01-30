@@ -3,10 +3,11 @@
     <image align="center" width="200" src='./web_hi_res_512.png' />
   </p>
 <p align="center">
-  Built with <b>React Native</b>.
+  Built with.
 </p>
 <div align="center">
   <image width="100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" />
+  <p><b>React Native</b></p>
   </div>
 
 
